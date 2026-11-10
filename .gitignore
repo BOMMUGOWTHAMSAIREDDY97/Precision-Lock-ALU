@@ -1,0 +1,13 @@
+*.swp
+*.swo
+*~
+.DS_Store
+.vscode/
+__pycache__/
+*.pyc
+
+# Generated simulation binaries
+*.vvp
+
+# Temporary logs
+*.log

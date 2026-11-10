@@ -1,0 +1,112 @@
+$date
+	Sat Nov  7 18:29:15 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module precision_detector_tb $end
+$var wire 1 ! precision_8_candidate $end
+$var reg 16 " operand_a [15:0] $end
+$var reg 16 # operand_b [15:0] $end
+$var integer 32 $ fail_count [31:0] $end
+$var integer 32 % pass_count [31:0] $end
+$scope module dut $end
+$var wire 16 & operand_a [15:0] $end
+$var wire 16 ' operand_b [15:0] $end
+$var wire 1 ! precision_8_candidate $end
+$var wire 1 ( b_fits_8 $end
+$var wire 1 ) a_fits_8 $end
+$upscope $end
+$scope task check $end
+$var reg 16 * a [15:0] $end
+$var reg 16 + b [15:0] $end
+$var reg 1 , expected $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+1,
+b110010 +
+b11001 *
+1)
+1(
+b110010 '
+b11001 &
+b0 %
+b0 $
+b110010 #
+b11001 "
+1!
+$end
+#10000
+b1100100 #
+b1100100 '
+b1111111 "
+b1111111 &
+b1100100 +
+b1111111 *
+b1 %
+#20000
+1(
+1)
+b1111111111001110 #
+b1111111111001110 '
+b1111111110000000 "
+b1111111110000000 &
+b1111111111001110 +
+b1111111110000000 *
+b10 %
+#30000
+1(
+b1 #
+b1 '
+b1111111111111111 "
+b1111111111111111 &
+b1 +
+b1111111111111111 *
+b11 %
+#40000
+0!
+0)
+b1010 #
+b1010 '
+b10000000 "
+b10000000 &
+0,
+b1010 +
+b10000000 *
+b100 %
+#50000
+0)
+b1111111101111111 "
+b1111111101111111 &
+b1111111101111111 *
+b101 %
+#60000
+0(
+1)
+b100101100 #
+b100101100 '
+b110010 "
+b110010 &
+b100101100 +
+b110010 *
+b110 %
+#70000
+0)
+b1111111011010100 #
+b1111111011010100 '
+b1111111100111000 "
+b1111111100111000 &
+b1111111011010100 +
+b1111111100111000 *
+b111 %
+#80000
+b1000 %
