@@ -96,3 +96,9 @@ No license has been assigned yet.
 
 ### Clock Distribution
 ![Clock Distribution](physical_design/images/final_clocks.webp.png)
+
+## GTKWave Simulation Results
+
+### Integrated Precision-Lock ALU System Waveform
+
+![Precision-Lock ALU GTKWave Simulation](simulation/gtkwave_images/precision_lock_system_waveform.png)
