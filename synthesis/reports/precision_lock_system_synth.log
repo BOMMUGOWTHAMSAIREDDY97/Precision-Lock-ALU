@@ -1,0 +1,1368 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Running command `read_verilog -sv rtl/precision_detector.v rtl/precision_lock_alu.v rtl/precision_transition_profiler.v rtl/precision_lock_system.v; synth -top precision_lock_system; stat; write_verilog synthesis/precision_lock_system_synth.v' --
+
+1. Executing Verilog-2005 frontend: rtl/precision_detector.v
+Parsing SystemVerilog input from `rtl/precision_detector.v' to AST representation.
+Generating RTLIL representation for module `\precision_detector'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/precision_lock_alu.v
+Parsing SystemVerilog input from `rtl/precision_lock_alu.v' to AST representation.
+Generating RTLIL representation for module `\precision_lock_alu'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/precision_transition_profiler.v
+Parsing SystemVerilog input from `rtl/precision_transition_profiler.v' to AST representation.
+Generating RTLIL representation for module `\precision_transition_profiler'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/precision_lock_system.v
+Parsing SystemVerilog input from `rtl/precision_lock_system.v' to AST representation.
+Generating RTLIL representation for module `\precision_lock_system'.
+Successfully finished Verilog frontend.
+
+5. Executing SYNTH pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1.1. Analyzing design hierarchy..
+Top module:  \precision_lock_system
+Used module:     \precision_transition_profiler
+Used module:     \precision_lock_alu
+Used module:     \precision_detector
+
+5.1.2. Analyzing design hierarchy..
+Top module:  \precision_lock_system
+Used module:     \precision_transition_profiler
+Used module:     \precision_lock_alu
+Used module:     \precision_detector
+Removed 0 unused modules.
+
+5.2. Executing PROC pass (convert processes to netlists).
+
+5.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$rtl/precision_transition_profiler.v:44$26 in module precision_transition_profiler.
+Marked 1 switch rules as full_case in process $proc$rtl/precision_transition_profiler.v:30$22 in module precision_transition_profiler.
+Marked 3 switch rules as full_case in process $proc$rtl/precision_lock_alu.v:23$7 in module precision_lock_alu.
+Removed a total of 0 dead cases.
+
+5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 6 assignments to connections.
+
+5.2.4. Executing PROC_INIT pass (extract init attributes).
+
+5.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \reset in `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:44$26'.
+
+5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~11 debug messages>
+
+5.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:44$26'.
+     1/6: $0\previous_mode_valid[0:0]
+     2/6: $0\previous_mode[0:0]
+     3/6: $0\transition_count[15:0]
+     4/6: $0\count_16bit[15:0]
+     5/6: $0\count_8bit[15:0]
+     6/6: $0\total_count[15:0]
+Creating decoders for process `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:30$22'.
+     1/2: $1\percentage_16bit[6:0]
+     2/2: $1\percentage_8bit[6:0]
+Creating decoders for process `\precision_lock_alu.$proc$rtl/precision_lock_alu.v:23$7'.
+     1/8: $3\precision_mode[0:0]
+     2/8: $3\result[15:0]
+     3/8: $2\precision_mode[0:0]
+     4/8: $2\result[15:0]
+     5/8: $1\precision_mode[0:0]
+     6/8: $1\result[15:0]
+     7/8: $1\full_result[16:0]
+     8/8: $1\reduced_result[8:0]
+
+5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\precision_transition_profiler.\percentage_8bit' from process `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:30$22'.
+No latch inferred for signal `\precision_transition_profiler.\percentage_16bit' from process `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:30$22'.
+No latch inferred for signal `\precision_lock_alu.\result' from process `\precision_lock_alu.$proc$rtl/precision_lock_alu.v:23$7'.
+No latch inferred for signal `\precision_lock_alu.\precision_mode' from process `\precision_lock_alu.$proc$rtl/precision_lock_alu.v:23$7'.
+No latch inferred for signal `\precision_lock_alu.\full_result' from process `\precision_lock_alu.$proc$rtl/precision_lock_alu.v:23$7'.
+No latch inferred for signal `\precision_lock_alu.\reduced_result' from process `\precision_lock_alu.$proc$rtl/precision_lock_alu.v:23$7'.
+
+5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\precision_transition_profiler.\total_count' using process `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:44$26'.
+  created $adff cell `$procdff$114' with positive edge clock and positive level reset.
+Creating register for signal `\precision_transition_profiler.\count_8bit' using process `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:44$26'.
+  created $adff cell `$procdff$115' with positive edge clock and positive level reset.
+Creating register for signal `\precision_transition_profiler.\count_16bit' using process `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:44$26'.
+  created $adff cell `$procdff$116' with positive edge clock and positive level reset.
+Creating register for signal `\precision_transition_profiler.\transition_count' using process `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:44$26'.
+  created $adff cell `$procdff$117' with positive edge clock and positive level reset.
+Creating register for signal `\precision_transition_profiler.\previous_mode' using process `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:44$26'.
+  created $adff cell `$procdff$118' with positive edge clock and positive level reset.
+Creating register for signal `\precision_transition_profiler.\previous_mode_valid' using process `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:44$26'.
+  created $adff cell `$procdff$119' with positive edge clock and positive level reset.
+
+5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 7 empty switches in `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:44$26'.
+Removing empty process `precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:44$26'.
+Found and cleaned up 1 empty switch in `\precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:30$22'.
+Removing empty process `precision_transition_profiler.$proc$rtl/precision_transition_profiler.v:30$22'.
+Found and cleaned up 3 empty switches in `\precision_lock_alu.$proc$rtl/precision_lock_alu.v:23$7'.
+Removing empty process `precision_lock_alu.$proc$rtl/precision_lock_alu.v:23$7'.
+Cleaned up 11 empty switches.
+
+5.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+<suppressed ~2 debug messages>
+Optimizing module precision_lock_alu.
+<suppressed ~6 debug messages>
+Optimizing module precision_detector.
+
+5.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+<suppressed ~2 debug messages>
+Optimizing module precision_lock_alu.
+Optimizing module precision_detector.
+
+5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_detector..
+Removed 6 unused cells and 62 unused wires.
+<suppressed ~11 debug messages>
+
+5.5. Executing CHECK pass (checking for obvious problems).
+Checking module precision_detector...
+Checking module precision_lock_alu...
+Checking module precision_lock_system...
+Checking module precision_transition_profiler...
+Found and reported 0 problems.
+
+5.6. Executing OPT pass (performing simple optimizations).
+
+5.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+<suppressed ~18 debug messages>
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+Removed a total of 6 cells.
+
+5.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \precision_detector..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_lock_alu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$76.
+    dead port 2/2 on $mux $procmux$82.
+    dead port 2/2 on $mux $procmux$89.
+    dead port 2/2 on $mux $procmux$96.
+Running muxtree optimizer on module \precision_lock_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_transition_profiler..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 4 multiplexer ports.
+<suppressed ~10 debug messages>
+
+5.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \precision_detector.
+  Optimizing cells in module \precision_lock_alu.
+  Optimizing cells in module \precision_lock_system.
+  Optimizing cells in module \precision_transition_profiler.
+Performed a total of 0 changes.
+
+5.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+Removed a total of 0 cells.
+
+5.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+Removed 0 unused cells and 10 unused wires.
+<suppressed ~1 debug messages>
+
+5.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \precision_detector..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_lock_alu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \precision_lock_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_transition_profiler..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+5.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \precision_detector.
+  Optimizing cells in module \precision_lock_alu.
+  Optimizing cells in module \precision_lock_system.
+  Optimizing cells in module \precision_transition_profiler.
+Performed a total of 0 changes.
+
+5.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+Removed a total of 0 cells.
+
+5.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+
+5.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.6.16. Finished OPT passes. (There is nothing left to do.)
+
+5.7. Executing FSM pass (extract and optimize FSM).
+
+5.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+5.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+
+5.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+5.8. Executing OPT pass (performing simple optimizations).
+
+5.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+Removed a total of 0 cells.
+
+5.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \precision_detector..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_lock_alu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \precision_lock_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_transition_profiler..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+5.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \precision_detector.
+  Optimizing cells in module \precision_lock_alu.
+  Optimizing cells in module \precision_lock_system.
+  Optimizing cells in module \precision_transition_profiler.
+Performed a total of 0 changes.
+
+5.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+Removed a total of 0 cells.
+
+5.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$119 ($adff) from module precision_transition_profiler (D = 1'1, Q = \previous_mode_valid).
+Adding EN signal on $procdff$118 ($adff) from module precision_transition_profiler (D = \precision_mode, Q = \previous_mode).
+Adding EN signal on $procdff$117 ($adff) from module precision_transition_profiler (D = $add$rtl/precision_transition_profiler.v:76$37_Y, Q = \transition_count).
+Adding EN signal on $procdff$116 ($adff) from module precision_transition_profiler (D = $add$rtl/precision_transition_profiler.v:67$33_Y, Q = \count_16bit).
+Adding EN signal on $procdff$115 ($adff) from module precision_transition_profiler (D = $add$rtl/precision_transition_profiler.v:63$31_Y, Q = \count_8bit).
+Adding EN signal on $procdff$114 ($adff) from module precision_transition_profiler (D = $add$rtl/precision_transition_profiler.v:58$28_Y, Q = \total_count).
+
+5.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+Removed 13 unused cells and 13 unused wires.
+<suppressed ~14 debug messages>
+
+5.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \precision_detector..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_lock_alu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \precision_lock_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_transition_profiler..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+5.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \precision_detector.
+  Optimizing cells in module \precision_lock_alu.
+  Optimizing cells in module \precision_lock_system.
+  Optimizing cells in module \precision_transition_profiler.
+Performed a total of 0 changes.
+
+5.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+Removed a total of 0 cells.
+
+5.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+
+5.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.8.16. Finished OPT passes. (There is nothing left to do.)
+
+5.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 9) from port A of cell precision_lock_alu.$add$rtl/precision_lock_alu.v:34$8 ($add).
+Removed top 1 bits (of 9) from port B of cell precision_lock_alu.$add$rtl/precision_lock_alu.v:34$8 ($add).
+Removed top 1 bits (of 17) from port Y of cell precision_lock_alu.$add$rtl/precision_lock_alu.v:37$9 ($add).
+Removed top 24 bits (of 32) from port B of cell precision_lock_alu.$ge$rtl/precision_lock_alu.v:40$10 ($ge).
+Removed top 24 bits (of 32) from port B of cell precision_lock_alu.$le$rtl/precision_lock_alu.v:41$12 ($le).
+Removed top 1 bits (of 9) from port A of cell precision_lock_alu.$sub$rtl/precision_lock_alu.v:55$14 ($sub).
+Removed top 1 bits (of 9) from port B of cell precision_lock_alu.$sub$rtl/precision_lock_alu.v:55$14 ($sub).
+Removed top 1 bits (of 17) from port Y of cell precision_lock_alu.$sub$rtl/precision_lock_alu.v:58$15 ($sub).
+Removed top 24 bits (of 32) from port B of cell precision_lock_alu.$ge$rtl/precision_lock_alu.v:61$16 ($ge).
+Removed top 24 bits (of 32) from port B of cell precision_lock_alu.$le$rtl/precision_lock_alu.v:62$18 ($le).
+Removed top 1 bits (of 2) from port B of cell precision_lock_alu.$procmux$100_CMP0 ($eq).
+Removed top 1 bits (of 17) from wire precision_lock_alu.$add$rtl/precision_lock_alu.v:37$9_Y.
+Removed top 7 bits (of 23) from port B of cell precision_transition_profiler.$div$rtl/precision_transition_profiler.v:36$24 ($div).
+Removed top 7 bits (of 23) from port B of cell precision_transition_profiler.$div$rtl/precision_transition_profiler.v:39$25 ($div).
+Removed top 7 bits (of 23) from port A of cell precision_transition_profiler.$mul$rtl/precision_transition_profiler.v:25$20 ($mul).
+Removed top 16 bits (of 21) from port B of cell precision_transition_profiler.$mul$rtl/precision_transition_profiler.v:25$20 ($mul).
+Removed top 7 bits (of 23) from port A of cell precision_transition_profiler.$mul$rtl/precision_transition_profiler.v:26$21 ($mul).
+Removed top 16 bits (of 21) from port B of cell precision_transition_profiler.$mul$rtl/precision_transition_profiler.v:26$21 ($mul).
+
+5.10. Executing PEEPOPT pass (run peephole optimizers).
+
+5.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+5.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module precision_detector:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module precision_lock_alu:
+  creating $macc model for $add$rtl/precision_lock_alu.v:34$8 ($add).
+  creating $macc model for $add$rtl/precision_lock_alu.v:37$9 ($add).
+  creating $macc model for $sub$rtl/precision_lock_alu.v:55$14 ($sub).
+  creating $macc model for $sub$rtl/precision_lock_alu.v:58$15 ($sub).
+  creating $alu model for $macc $sub$rtl/precision_lock_alu.v:58$15.
+  creating $alu model for $macc $sub$rtl/precision_lock_alu.v:55$14.
+  creating $alu model for $macc $add$rtl/precision_lock_alu.v:37$9.
+  creating $alu model for $macc $add$rtl/precision_lock_alu.v:34$8.
+  creating $alu model for $ge$rtl/precision_lock_alu.v:40$10 ($ge): new $alu
+  creating $alu model for $ge$rtl/precision_lock_alu.v:61$16 ($ge): new $alu
+  creating $alu model for $le$rtl/precision_lock_alu.v:41$12 ($le): new $alu
+  creating $alu model for $le$rtl/precision_lock_alu.v:62$18 ($le): new $alu
+  creating $alu cell for $le$rtl/precision_lock_alu.v:62$18: $auto$alumacc.cc:485:replace_alu$141
+  creating $alu cell for $le$rtl/precision_lock_alu.v:41$12: $auto$alumacc.cc:485:replace_alu$156
+  creating $alu cell for $ge$rtl/precision_lock_alu.v:61$16: $auto$alumacc.cc:485:replace_alu$171
+  creating $alu cell for $ge$rtl/precision_lock_alu.v:40$10: $auto$alumacc.cc:485:replace_alu$182
+  creating $alu cell for $add$rtl/precision_lock_alu.v:34$8: $auto$alumacc.cc:485:replace_alu$193
+  creating $alu cell for $add$rtl/precision_lock_alu.v:37$9: $auto$alumacc.cc:485:replace_alu$196
+  creating $alu cell for $sub$rtl/precision_lock_alu.v:55$14: $auto$alumacc.cc:485:replace_alu$199
+  creating $alu cell for $sub$rtl/precision_lock_alu.v:58$15: $auto$alumacc.cc:485:replace_alu$202
+  created 8 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module precision_lock_system:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module precision_transition_profiler:
+  creating $macc model for $add$rtl/precision_transition_profiler.v:58$28 ($add).
+  creating $macc model for $add$rtl/precision_transition_profiler.v:63$31 ($add).
+  creating $macc model for $add$rtl/precision_transition_profiler.v:67$33 ($add).
+  creating $macc model for $add$rtl/precision_transition_profiler.v:76$37 ($add).
+  creating $macc model for $mul$rtl/precision_transition_profiler.v:25$20 ($mul).
+  creating $macc model for $mul$rtl/precision_transition_profiler.v:26$21 ($mul).
+  creating $alu model for $macc $add$rtl/precision_transition_profiler.v:76$37.
+  creating $alu model for $macc $add$rtl/precision_transition_profiler.v:67$33.
+  creating $alu model for $macc $add$rtl/precision_transition_profiler.v:63$31.
+  creating $alu model for $macc $add$rtl/precision_transition_profiler.v:58$28.
+  creating $macc cell for $mul$rtl/precision_transition_profiler.v:25$20: $auto$alumacc.cc:365:replace_macc$205
+  creating $macc cell for $mul$rtl/precision_transition_profiler.v:26$21: $auto$alumacc.cc:365:replace_macc$206
+  creating $alu cell for $add$rtl/precision_transition_profiler.v:58$28: $auto$alumacc.cc:485:replace_alu$207
+  creating $alu cell for $add$rtl/precision_transition_profiler.v:63$31: $auto$alumacc.cc:485:replace_alu$210
+  creating $alu cell for $add$rtl/precision_transition_profiler.v:67$33: $auto$alumacc.cc:485:replace_alu$213
+  creating $alu cell for $add$rtl/precision_transition_profiler.v:76$37: $auto$alumacc.cc:485:replace_alu$216
+  created 4 $alu and 2 $macc cells.
+
+5.13. Executing SHARE pass (SAT-based resource sharing).
+Found 2 cells in module precision_transition_profiler that may be considered for resource sharing.
+  Analyzing resource sharing options for $div$rtl/precision_transition_profiler.v:39$25 ($div):
+    Found 1 activation_patterns using ctrl signal $ne$rtl/precision_transition_profiler.v:34$23_Y.
+    Found 1 candidates: $div$rtl/precision_transition_profiler.v:36$24
+    Analyzing resource sharing with $div$rtl/precision_transition_profiler.v:36$24 ($div):
+      Found 1 activation_patterns using ctrl signal $ne$rtl/precision_transition_profiler.v:34$23_Y.
+      Activation pattern for cell $div$rtl/precision_transition_profiler.v:39$25: $ne$rtl/precision_transition_profiler.v:34$23_Y = 1'1
+      Activation pattern for cell $div$rtl/precision_transition_profiler.v:36$24: $ne$rtl/precision_transition_profiler.v:34$23_Y = 1'1
+      Size of SAT problem: 0 cells, 25 variables, 36 clauses
+      According to the SAT solver this pair of cells can not be shared.
+      Model from SAT solver: $ne$rtl/precision_transition_profiler.v:34$23_Y = 1'1
+  Analyzing resource sharing options for $div$rtl/precision_transition_profiler.v:36$24 ($div):
+    Found 1 activation_patterns using ctrl signal $ne$rtl/precision_transition_profiler.v:34$23_Y.
+    No candidates found.
+
+5.14. Executing OPT pass (performing simple optimizations).
+
+5.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+Removed a total of 0 cells.
+
+5.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \precision_detector..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_lock_alu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \precision_lock_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_transition_profiler..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+5.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \precision_detector.
+  Optimizing cells in module \precision_lock_alu.
+  Optimizing cells in module \precision_lock_system.
+  Optimizing cells in module \precision_transition_profiler.
+Performed a total of 0 changes.
+
+5.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+Removed a total of 0 cells.
+
+5.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+5.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \precision_detector..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_lock_alu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \precision_lock_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_transition_profiler..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+5.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \precision_detector.
+  Optimizing cells in module \precision_lock_alu.
+  Optimizing cells in module \precision_lock_system.
+  Optimizing cells in module \precision_transition_profiler.
+Performed a total of 0 changes.
+
+5.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+Removed a total of 0 cells.
+
+5.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+
+5.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.14.16. Finished OPT passes. (There is nothing left to do.)
+
+5.15. Executing MEMORY pass.
+
+5.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+5.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+5.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+5.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+5.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+
+5.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+5.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+
+5.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+
+5.17. Executing OPT pass (performing simple optimizations).
+
+5.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+<suppressed ~4 debug messages>
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+Removed a total of 0 cells.
+
+5.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+Removed 14 unused cells and 16 unused wires.
+<suppressed ~15 debug messages>
+
+5.17.5. Finished fast OPT passes.
+
+5.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+5.19. Executing OPT pass (performing simple optimizations).
+
+5.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+Removed a total of 0 cells.
+
+5.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \precision_detector..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_lock_alu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \precision_lock_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \precision_transition_profiler..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+5.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \precision_detector.
+  Optimizing cells in module \precision_lock_alu.
+  Optimizing cells in module \precision_lock_system.
+  Optimizing cells in module \precision_transition_profiler.
+Performed a total of 0 changes.
+
+5.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+Removed a total of 0 cells.
+
+5.19.6. Executing OPT_SHARE pass.
+
+5.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+
+5.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.19.10. Finished OPT passes. (There is nothing left to do.)
+
+5.20. Executing TECHMAP pass (map to technology primitives).
+
+5.20.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+5.20.2. Continuing TECHMAP pass.
+Using extmapper maccmap for cells of type $macc.
+  add \count_8bit * 5'11001 (16x5 bits, unsigned)
+  add \count_16bit * 5'11001 (16x5 bits, unsigned)
+Using template $paramod$2af30114e9bd4ccb04dad757b3f0a8f6bf0615b0\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using template $paramod$6c52dc1fab92009bd8021484dc9fa461f216b171\_90_div for cells of type $div.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000010101 for cells of type $fa.
+Using template $paramod$950cc9f9d9b07c09d0ee4a231126f2c8a3c4f78a\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000010000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod$6c52dc1fab92009bd8021484dc9fa461f216b171\$__div_mod_trunc for cells of type $__div_mod_trunc.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000010101 for cells of type $lcu.
+Running "alumacc" on wrapper $extern:wrap:$neg:Y_WIDTH=23:A_WIDTH=23:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$neg:Y_WIDTH=23:A_WIDTH=23:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$neg:Y_WIDTH=23:A_WIDTH=23:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod\$__div_mod_u\WIDTH=32'00000000000000000000000000010111 for cells of type $__div_mod_u.
+Using template $paramod$0f18b05d33f7867ae8d44c79c4e5d69c7a3654cf\_90_alu for cells of type $alu.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=23:B_WIDTH=23:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=23:B_WIDTH=23:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=23:B_WIDTH=23:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=23:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=23:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=23:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=24:B_WIDTH=24:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=24:B_WIDTH=24:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=24:B_WIDTH=24:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=24:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=24:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=24:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=25:B_WIDTH=25:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=25:B_WIDTH=25:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=25:B_WIDTH=25:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=25:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=25:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=25:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=26:B_WIDTH=26:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=26:B_WIDTH=26:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=26:B_WIDTH=26:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=26:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=26:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=26:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=27:B_WIDTH=27:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=27:B_WIDTH=27:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=27:B_WIDTH=27:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=27:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=27:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=27:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=28:B_WIDTH=28:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=28:B_WIDTH=28:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=28:B_WIDTH=28:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=28:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=28:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=28:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=29:B_WIDTH=29:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=29:B_WIDTH=29:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=29:B_WIDTH=29:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=29:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=29:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=29:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=30:B_WIDTH=30:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=30:B_WIDTH=30:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=30:B_WIDTH=30:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=30:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=30:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=30:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=31:B_WIDTH=31:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=31:B_WIDTH=31:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=31:B_WIDTH=31:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=31:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=31:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=31:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=32:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=32:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=32:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=33:B_WIDTH=33:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=33:B_WIDTH=33:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=33:B_WIDTH=33:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=33:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=33:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=33:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=34:B_WIDTH=34:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=34:B_WIDTH=34:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=34:B_WIDTH=34:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=34:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=34:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=34:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=35:B_WIDTH=35:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=35:B_WIDTH=35:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=35:B_WIDTH=35:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=35:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=35:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=35:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=36:B_WIDTH=36:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=36:B_WIDTH=36:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=36:B_WIDTH=36:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=36:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=36:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=36:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=37:B_WIDTH=37:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=37:B_WIDTH=37:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=37:B_WIDTH=37:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=37:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=37:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=37:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=38:B_WIDTH=38:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=38:B_WIDTH=38:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=38:B_WIDTH=38:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=38:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=38:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=38:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=39:B_WIDTH=39:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=39:B_WIDTH=39:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=39:B_WIDTH=39:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=39:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=39:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=39:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=40:B_WIDTH=40:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=40:B_WIDTH=40:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=40:B_WIDTH=40:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=40:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=40:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=40:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=41:B_WIDTH=41:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=41:B_WIDTH=41:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=41:B_WIDTH=41:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=41:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=41:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=41:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=42:B_WIDTH=42:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=42:B_WIDTH=42:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=42:B_WIDTH=42:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=42:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=42:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=42:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=43:B_WIDTH=43:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=43:B_WIDTH=43:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=43:B_WIDTH=43:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=43:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=43:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=43:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=44:B_WIDTH=44:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=44:B_WIDTH=44:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=44:B_WIDTH=44:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=44:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=44:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=44:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=45:B_WIDTH=45:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=45:B_WIDTH=45:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=45:B_WIDTH=45:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=45:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=45:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:Y_WIDTH=1:B_WIDTH=45:A_WIDTH=23:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000010111 for cells of type $lcu.
+Using template $paramod$448756c9a9dfaa49080ce4b90c6cc182883e181f\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod$9b8eb1bd6c22e5bc2c906d797c61755b8382a756\_90_alu for cells of type $alu.
+Using template $paramod$0144272fecfe851744aaef095a21549934dfcab2\_90_alu for cells of type $alu.
+Using template $paramod$3cd38224f5fa8b4be2908c2282a40de9131cdb09\_90_alu for cells of type $alu.
+Using template $paramod$3e9fbadeb4153b2abc14e390b5f32bbbcefd82b9\_90_alu for cells of type $alu.
+Using template $paramod$9f79460271909c06a1eaf7eb81aea2ea0f0c5fa1\_90_alu for cells of type $alu.
+Using template $paramod$6e934d6abfbb47445d3a9654226e04a1dd5d7665\_90_alu for cells of type $alu.
+Using template $paramod$7518211cb37bc9e1e298a1e33abd77e5840b540e\_90_alu for cells of type $alu.
+Using template $paramod$86a2c5a0a669c1f20501a2b6fdf7c7bac6b2406d\_90_alu for cells of type $alu.
+Using template $paramod$0ed36e5356dd00b0a2b97a2f79a94e5cb793820a\_90_alu for cells of type $alu.
+Using template $paramod$ff81853527adb0f480c4ad47a017ca4568deb78c\_90_alu for cells of type $alu.
+Using template $paramod$f4c0816535baabf63e62cc1ee7f06d15e45661d7\_90_alu for cells of type $alu.
+Using template $paramod$0a736965ea4b633ff81a61e719969288a2d31fe2\_90_alu for cells of type $alu.
+Using template $paramod$9b6478e0db0f844eecf2fa447f8e6c7a623a53e0\_90_alu for cells of type $alu.
+Using template $paramod$1749dcf59dac2dc6c265a32be3a726679ee9d701\_90_alu for cells of type $alu.
+Using template $paramod$d7a5b0ce8ea640cb8ee7f000f543907bf2d4df13\_90_alu for cells of type $alu.
+Using template $paramod$a7d91baffc58f3d3b6562e86abe67891a2613a46\_90_alu for cells of type $alu.
+Using template $paramod$d96d24a47f41481a680b9496b98a55fcf4bfd367\_90_alu for cells of type $alu.
+Using template $paramod$ac048c54153629d6169e2ee328497956350ddc37\_90_alu for cells of type $alu.
+Using template $paramod$c889903598bd19ad0f4d1706ba7033d4fc61eab9\_90_alu for cells of type $alu.
+Using template $paramod$6f8600a356c492c983676176edccfc480af9acfe\_90_alu for cells of type $alu.
+Using template $paramod$56d9b20c2f09220e635abdece1d97d041f2368f9\_90_alu for cells of type $alu.
+Using template $paramod$eeb12b1638e8e215e95357ca59126913ce617704\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000011000 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000011001 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000011010 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000011011 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000011100 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000011101 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000011110 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000011111 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100001 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100010 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100011 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100100 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100101 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100110 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100111 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000101000 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000101001 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000101010 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000101011 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000101100 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000101101 for cells of type $lcu.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$d4c0c20b0ee59f495e14575c4397dc0a6dd9e8e6\_90_alu for cells of type $alu.
+Using template $paramod$381d5ac9ce4d79feb95fa03ade8f84c5a58bb3c0\_90_alu for cells of type $alu.
+Using template $paramod$dacab66a6fbbff7c4c5c7c74cefcccef3d693852\_90_alu for cells of type $alu.
+Using template $paramod$0cf90cc92a8a726f7480da3c1dd521ff92701be4\_90_alu for cells of type $alu.
+Using template $paramod$c5c783b17ab1d780abfad8cfe6563a0a7b47a3b0\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod$0d149ffe75563ef6fcc1a3dddc59d00af28651a7\_90_pmux for cells of type $pmux.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~21628 debug messages>
+
+5.21. Executing OPT pass (performing simple optimizations).
+
+5.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+<suppressed ~186 debug messages>
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+<suppressed ~17244 debug messages>
+
+5.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+<suppressed ~426 debug messages>
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+<suppressed ~32640 debug messages>
+Removed a total of 11022 cells.
+
+5.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+Removed 1895 unused cells and 14449 unused wires.
+<suppressed ~1898 debug messages>
+
+5.21.5. Finished fast OPT passes.
+
+5.22. Executing ABC pass (technology mapping using ABC).
+
+5.22.1. Extracting gate netlist of module `\precision_detector' to `<abc-temp-dir>/input.blif'..
+Extracted 33 gates and 51 wires to a netlist network with 18 inputs and 1 outputs.
+
+5.22.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+5.22.1.2. Re-integrating ABC results.
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:               XOR cells:       15
+ABC RESULTS:                OR cells:       11
+ABC RESULTS:            ANDNOT cells:        4
+ABC RESULTS:        internal signals:       32
+ABC RESULTS:           input signals:       18
+ABC RESULTS:          output signals:        1
+Removing temp directory.
+
+5.22.2. Extracting gate netlist of module `\precision_lock_alu' to `<abc-temp-dir>/input.blif'..
+Extracted 436 gates and 471 wires to a netlist network with 34 inputs and 17 outputs.
+
+5.22.2.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+5.22.2.2. Re-integrating ABC results.
+ABC RESULTS:               NOT cells:       17
+ABC RESULTS:               AND cells:       11
+ABC RESULTS:               NOR cells:       15
+ABC RESULTS:              XNOR cells:       25
+ABC RESULTS:             ORNOT cells:       18
+ABC RESULTS:                OR cells:       68
+ABC RESULTS:              NAND cells:       13
+ABC RESULTS:               XOR cells:       71
+ABC RESULTS:               MUX cells:       16
+ABC RESULTS:            ANDNOT cells:      141
+ABC RESULTS:        internal signals:      420
+ABC RESULTS:           input signals:       34
+ABC RESULTS:          output signals:       17
+Removing temp directory.
+
+5.22.3. Extracting gate netlist of module `\precision_lock_system' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+5.22.4. Extracting gate netlist of module `\precision_transition_profiler' to `<abc-temp-dir>/input.blif'..
+Extracted 8234 gates and 8303 wires to a netlist network with 68 inputs and 82 outputs.
+
+5.22.4.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+5.22.4.2. Re-integrating ABC results.
+ABC RESULTS:               NOT cells:      436
+ABC RESULTS:               MUX cells:      896
+ABC RESULTS:              NAND cells:      145
+ABC RESULTS:                OR cells:      764
+ABC RESULTS:              XNOR cells:      210
+ABC RESULTS:               AND cells:      126
+ABC RESULTS:             ORNOT cells:      259
+ABC RESULTS:               NOR cells:      335
+ABC RESULTS:            ANDNOT cells:     3152
+ABC RESULTS:               XOR cells:     1321
+ABC RESULTS:        internal signals:     8153
+ABC RESULTS:           input signals:       68
+ABC RESULTS:          output signals:       82
+Removing temp directory.
+
+5.23. Executing OPT pass (performing simple optimizations).
+
+5.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module precision_detector.
+Optimizing module precision_lock_alu.
+Optimizing module precision_lock_system.
+Optimizing module precision_transition_profiler.
+
+5.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\precision_detector'.
+Finding identical cells in module `\precision_lock_alu'.
+<suppressed ~39 debug messages>
+Finding identical cells in module `\precision_lock_system'.
+Finding identical cells in module `\precision_transition_profiler'.
+<suppressed ~261 debug messages>
+Removed a total of 100 cells.
+
+5.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \precision_detector..
+Finding unused cells or wires in module \precision_lock_alu..
+Finding unused cells or wires in module \precision_lock_system..
+Finding unused cells or wires in module \precision_transition_profiler..
+Removed 0 unused cells and 3612 unused wires.
+<suppressed ~8 debug messages>
+
+5.23.5. Finished fast OPT passes.
+
+5.24. Executing HIERARCHY pass (managing design hierarchy).
+
+5.24.1. Analyzing design hierarchy..
+Top module:  \precision_lock_system
+Used module:     \precision_lock_alu
+Used module:     \precision_detector
+Used module:     \precision_transition_profiler
+
+5.24.2. Analyzing design hierarchy..
+Top module:  \precision_lock_system
+Used module:     \precision_lock_alu
+Used module:     \precision_detector
+Used module:     \precision_transition_profiler
+Removed 0 unused modules.
+
+5.25. Printing statistics.
+
+=== precision_detector ===
+
+   Number of wires:                 33
+   Number of wire bits:             63
+   Number of public wires:           3
+   Number of public wire bits:      33
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 31
+     $_ANDNOT_                       4
+     $_OR_                          11
+     $_XNOR_                         1
+     $_XOR_                         15
+
+=== precision_lock_alu ===
+
+   Number of wires:                370
+   Number of wire bits:            416
+   Number of public wires:           5
+   Number of public wire bits:      51
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                382
+     $_ANDNOT_                     141
+     $_AND_                         11
+     $_MUX_                         16
+     $_NAND_                        13
+     $_NOR_                         15
+     $_NOT_                         17
+     $_ORNOT_                       18
+     $_OR_                          68
+     $_XNOR_                        22
+     $_XOR_                         61
+
+=== precision_lock_system ===
+
+   Number of wires:                 15
+   Number of wire bits:            133
+   Number of public wires:          15
+   Number of public wire bits:     133
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  3
+     precision_detector              1
+     precision_lock_alu              1
+     precision_transition_profiler      1
+
+=== precision_transition_profiler ===
+
+   Number of wires:               7502
+   Number of wire bits:           7760
+   Number of public wires:          15
+   Number of public wire bits:     153
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               7623
+     $_ANDNOT_                    3072
+     $_AND_                        126
+     $_DFFE_PP0P_                   66
+     $_MUX_                        896
+     $_NAND_                       145
+     $_NOR_                        334
+     $_NOT_                        436
+     $_ORNOT_                      259
+     $_OR_                         758
+     $_XNOR_                       210
+     $_XOR_                       1321
+
+=== design hierarchy ===
+
+   precision_lock_system             1
+     precision_detector              1
+     precision_lock_alu              1
+     precision_transition_profiler      1
+
+   Number of wires:               7920
+   Number of wire bits:           8372
+   Number of public wires:          38
+   Number of public wire bits:     370
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               8036
+     $_ANDNOT_                    3217
+     $_AND_                        137
+     $_DFFE_PP0P_                   66
+     $_MUX_                        912
+     $_NAND_                       158
+     $_NOR_                        349
+     $_NOT_                        453
+     $_ORNOT_                      277
+     $_OR_                         837
+     $_XNOR_                       233
+     $_XOR_                       1397
+
+5.26. Executing CHECK pass (checking for obvious problems).
+Checking module precision_detector...
+Checking module precision_lock_alu...
+Checking module precision_lock_system...
+Checking module precision_transition_profiler...
+Found and reported 0 problems.
+
+6. Printing statistics.
+
+=== precision_detector ===
+
+   Number of wires:                 33
+   Number of wire bits:             63
+   Number of public wires:           3
+   Number of public wire bits:      33
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 31
+     $_ANDNOT_                       4
+     $_OR_                          11
+     $_XNOR_                         1
+     $_XOR_                         15
+
+=== precision_lock_alu ===
+
+   Number of wires:                370
+   Number of wire bits:            416
+   Number of public wires:           5
+   Number of public wire bits:      51
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                382
+     $_ANDNOT_                     141
+     $_AND_                         11
+     $_MUX_                         16
+     $_NAND_                        13
+     $_NOR_                         15
+     $_NOT_                         17
+     $_ORNOT_                       18
+     $_OR_                          68
+     $_XNOR_                        22
+     $_XOR_                         61
+
+=== precision_lock_system ===
+
+   Number of wires:                 15
+   Number of wire bits:            133
+   Number of public wires:          15
+   Number of public wire bits:     133
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  3
+     precision_detector              1
+     precision_lock_alu              1
+     precision_transition_profiler      1
+
+=== precision_transition_profiler ===
+
+   Number of wires:               7502
+   Number of wire bits:           7760
+   Number of public wires:          15
+   Number of public wire bits:     153
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               7623
+     $_ANDNOT_                    3072
+     $_AND_                        126
+     $_DFFE_PP0P_                   66
+     $_MUX_                        896
+     $_NAND_                       145
+     $_NOR_                        334
+     $_NOT_                        436
+     $_ORNOT_                      259
+     $_OR_                         758
+     $_XNOR_                       210
+     $_XOR_                       1321
+
+=== design hierarchy ===
+
+   precision_lock_system             1
+     precision_detector              1
+     precision_lock_alu              1
+     precision_transition_profiler      1
+
+   Number of wires:               7920
+   Number of wire bits:           8372
+   Number of public wires:          38
+   Number of public wire bits:     370
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               8036
+     $_ANDNOT_                    3217
+     $_AND_                        137
+     $_DFFE_PP0P_                   66
+     $_MUX_                        912
+     $_NAND_                       158
+     $_NOR_                        349
+     $_NOT_                        453
+     $_ORNOT_                      277
+     $_OR_                         837
+     $_XNOR_                       233
+     $_XOR_                       1397
+
+7. Executing Verilog backend.
+
+7.1. Executing BMUXMAP pass.
+
+7.2. Executing DEMUXMAP pass.
+Dumping module `\precision_detector'.
+Dumping module `\precision_lock_alu'.
+Dumping module `\precision_lock_system'.
+Dumping module `\precision_transition_profiler'.
+
+End of script. Logfile hash: 50f2291042, CPU: user 6.70s system 0.21s, MEM: 242.78 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 27% 70x opt_expr (2 sec), 24% 1x techmap (1 sec), ...
