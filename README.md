@@ -79,3 +79,20 @@ BOMMU GOWTHAM SAI REDDY
 ## License
 
 No license has been assigned yet.
+
+## Physical Design Visual Results
+
+### Final Placement
+![Final Placement](physical_design/images/final_placement.webp.png)
+
+### Final Routing
+![Final Routing](physical_design/images/final_routing.webp.png)
+
+### IR Drop Analysis
+![IR Drop Analysis](physical_design/images/final_ir_drop.webp.png)
+
+### Complete Physical Design View
+![Complete Physical Design](physical_design/images/final_all.webp.png)
+
+### Clock Distribution
+![Clock Distribution](physical_design/images/final_clocks.webp.png)
