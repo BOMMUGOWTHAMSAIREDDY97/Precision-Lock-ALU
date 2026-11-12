@@ -1,0 +1,26 @@
+VCD info: dumpfile experiments/full_system_validation/full_system_power.vcd opened for output.
+===== DIRECTED BOUNDARY TESTS =====
+===== SIGNED 8-BIT OPERAND TESTS =====
+===== FULL-WIDTH OPERAND TESTS =====
+
+========================================
+FULL-SYSTEM GATE-LEVEL SUMMARY
+========================================
+Operations tested       : 4107
+Arithmetic mismatches   : 0
+
+EXPECTED PROFILER COUNTERS
+Total                   : 4107
+8-bit                   : 1537
+16-bit                  : 2570
+Transitions             : 657
+
+ACTUAL PROFILER COUNTERS
+Total                   : 4107
+8-bit                   : 1537
+16-bit                  : 2570
+Transitions             : 657
+
+RESULT: PASS
+========================================
+/home/bommugowthamsaireddy/Precision_Lock_ALU/experiments/full_system_validation/full_system_power_tb.v:220: $finish called at 82173000 (1ps)

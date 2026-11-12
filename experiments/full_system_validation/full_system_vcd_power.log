@@ -1,0 +1,83 @@
+OpenROAD 26Q2-1164-g08f67ee5ec 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+mkdir -p ./objects/sky130hd/precision_lock_alu/base
+/home/bommugowthamsaireddy/OpenROAD-flow-scripts/flow/scripts/flow.sh 6_report final_report
+Running final_report.tcl, stage 6_report
+read_liberty /home/bommugowthamsaireddy/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db ./results/sky130hd/precision_lock_alu/base/6_1_fill.odb
+read_sdc ./results/sky130hd/precision_lock_alu/base/6_1_fill.sdc
+source /home/bommugowthamsaireddy/OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+write_db ./results/sky130hd/precision_lock_alu/base/6_final.odb
+write_sdc -no_timestamp ./results/sky130hd/precision_lock_alu/base/6_final.sdc
+Deleted 0 routing obstructions
+Warning: master sky130_ef_sc_hd__decap_12 has signal pins but no liberty cell
+[INFO RCX-0431] Defined process_corner X with ext_model_index 0
+[INFO RCX-0029] Defined extraction corner X
+[INFO RCX-0435] Reading extraction model file /home/bommugowthamsaireddy/OpenROAD-flow-scripts/flow/platforms/sky130hd/rcx_patterns.rules ...
+[INFO RCX-0436] RC segment generation precision_lock_system_opt (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 2651 rc segments
+[INFO RCX-0439] Coupling Cap extraction precision_lock_system_opt ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0442] 54% of 4837 wires extracted
+[INFO RCX-0442] 100% of 4837 wires extracted
+[INFO RCX-0045] Extract 805 nets, 3421 rsegs, 3421 caps, 4440 ccs
+[INFO RCX-0443] 805 nets finished
+[INFO PSM-0040] All shapes on net VDD are connected.
+########## IR report #################
+Net              : VDD
+Corner           : default
+Total power      : 4.57e-04 W
+Supply voltage   : 1.80e+00 V
+Worstcase voltage: 1.80e+00 V
+Average voltage  : 1.80e+00 V
+Average IR drop  : 8.43e-06 V
+Worstcase IR drop: 4.59e-05 V
+Percentage drop  : 0.00 %
+######################################
+[INFO PSM-0040] All shapes on net VSS are connected.
+########## IR report #################
+Net              : VSS
+Corner           : default
+Total power      : 4.57e-04 W
+Supply voltage   : 0.00e+00 V
+Worstcase voltage: 5.87e-05 V
+Average voltage  : 7.34e-06 V
+Average IR drop  : 7.34e-06 V
+Worstcase IR drop: 5.87e-05 V
+Percentage drop  : 0.00 %
+######################################
+Cell type report:                       Count       Area
+  Fill cell                              1127    5846.86
+  Tap cell                                172     215.21
+  Clock buffer                             14     274.01
+  Timing Repair Buffer                    121    1203.65
+  Inverter                                 46     177.67
+  Clock inverter                            2      10.01
+  Sequential cell                          66    1651.58
+  Multi-Input combinational cell          470    3445.80
+  Total                                  2018   12824.80
+Report metrics stage 6, finish...
+Annotated 2534 pin activities.
+vcd          2534
+unannotated     0
+
+==========================================================================
+finish report_design_area
+--------------------------------------------------------------------------
+Design area 6978 um^2 54% utilization.
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/sky130hd/precision_lock_alu/base/final_all.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/sky130hd/precision_lock_alu/base/final_routing.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/sky130hd/precision_lock_alu/base/final_placement.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/sky130hd/precision_lock_alu/base/final_ir_drop.webp.png
+[WARNING GUI-0066] Heat map "IR Drop" has not been populated with data.
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/sky130hd/precision_lock_alu/base/final_resizer.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/sky130hd/precision_lock_alu/base/final_congestion.webp.png
+[WARNING GUI-0066] Heat map "Routing Congestion" has not been populated with data.
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/sky130hd/precision_lock_alu/base/final_worst_path.webp.png
+Elapsed time: 0:03.27[h:]min:sec. CPU time: user 2.56 sys 0.44 (91%). Peak memory: 249580KB.
+Log                    Ext     Elapsed      CPU     CPU/ Peak Mem sha1sum
+                                     s        s  Elapsed       MB [0:10)
+6_report                             3        3     0.92      243 N/A

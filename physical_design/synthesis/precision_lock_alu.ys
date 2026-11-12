@@ -1,0 +1,14 @@
+read_verilog rtl/precision_lock_alu.v
+
+hierarchy -check -top precision_lock_alu
+
+synth -top precision_lock_alu -noabc
+
+abc -liberty ~/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+clean
+check
+
+stat -liberty ~/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+write_verilog -noattr physical_design/synthesis/precision_lock_alu_mapped.v
