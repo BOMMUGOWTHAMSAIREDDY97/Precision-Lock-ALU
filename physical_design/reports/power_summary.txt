@@ -1,0 +1,30 @@
+PRECISION-LOCK ALU: POST-ROUTE POWER ANALYSIS
+
+Technology: SKY130HD
+Library corner: TT, 25C, 1.8V
+Clock period: 20 ns
+Clock frequency: 50 MHz
+Simulation: Gate-level functional simulation
+Parasitics: Extracted post-route SPEF
+
+Total estimated power: 0.460 mW
+
+Sequential power:     0.145 mW
+Combinational power:  0.168 mW
+Clock power:          0.147 mW
+Leakage power:        3.12 nW
+
+Annotated pin activities: 2534
+Unannotated pin activities: 0
+
+Test operations: 5
+8-bit operations: 3
+16-bit operations: 2
+Precision transitions: 4
+
+Simulation checks passed: 4
+Simulation checks failed: 0
+
+Note:
+This is an OpenROAD/OpenSTA power estimate for the
+specified simulation workload, not measured silicon power.
